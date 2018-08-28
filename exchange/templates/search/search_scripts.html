@@ -1,0 +1,61 @@
+{% load base_tags_exchange %}
+{% if DEBUG_STATIC %}
+
+<script src="{{ STATIC_URL }}lib/js/angular.js?v={{ VERSION }}"></script>
+<script src="{{ STATIC_URL }}lib/js/angular-leaflet-directive.min.js?v={{ VERSION }}"></script>
+<script src="{{ STATIC_URL }}lib/js/bootstrap-treeview.min.js?v={{ VERSION }}"></script>
+{% endif %}
+
+{% if include_spatial == 'true' %}
+<style>
+  .filter-map-container {  /* filter map */
+    height: 300px;
+  }
+</style>
+
+{% include 'search/_spatial_tags.html' %}
+
+{% endif %}
+<script src="{{ STATIC_URL }}js/clipboard.min.js"></script>
+<script src="{{ STATIC_URL }}js/ngclipboard.min.js"></script>
+<script src="{{ STATIC_URL }}geonode/js/search/explore.js?v={{ VERSION }}"></script>
+<script src="{{ STATIC_URL }}js/search/search.js?v={{ VERSION }}"></script>
+<script src="{{ STATIC_URL }}js/search/workspace.js"></script>
+<script type="text/javascript">
+  $("body").attr('ng-controller', 'geonode_search_controller');
+  HAYSTACK_SEARCH = "{{ HAYSTACK_SEARCH }}".toLowerCase() === "true";
+  CLIENT_RESULTS_LIMIT = {{ CLIENT_RESULTS_LIMIT }};
+  ES_SEARCH = "{{ ES_SEARCH }}".toLowerCase() === "true";
+
+    var module = angular.module('search', ['geonode_main_search', 'cart']);
+    module.constant('Configs', {
+        url: SEARCH_URL
+    });
+
+    module.directive('tooltip', function(){
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs){
+                $(element).hover(function(){
+                    $(element).tooltip('show');
+                }, function(){
+                    $(element).tooltip('hide');
+                });
+                //Bind event for clipboard copying
+                $(element).bind('copied', function(event, message) {
+                    $(this).attr('title', message)
+                            .tooltip('fixTitle')
+                            .tooltip('show')
+                            .attr('title', "Copy to Clipboard")
+                            .tooltip('fixTitle');
+                });
+            }
+        };
+    });
+
+  var deps = ['search'];
+  {% if include_spatial == 'true' %}
+  deps.push('leaflet-directive');
+  {% endif %}
+  angular.bootstrap(document, deps);
+</script>

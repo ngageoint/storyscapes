@@ -1,0 +1,168 @@
+html,
+body {
+  height: 100%;
+}
+.jumbotron .container {
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+}
+.navbar-brand {
+  margin-top: 10px;
+  overflow: hidden;
+  text-indent: -9999em;
+  width: 180px;
+  height: 35px;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: #FFFFFF;
+}
+.title {
+  line-height: 96px;
+}
+.footer {
+  border-top: 1px solid #cccccc;
+  height: 60px;
+  padding: 17px;
+  margin-top: 10px;
+}
+.footer .container .row {
+  color: #FFFFFF;
+}
+.footer .container .row select{
+  color: #000000;
+}
+a:hover{
+  color: #009888;
+}
+.info-blurb{
+  color: #000000;
+}
+.info-blurb:hover{
+  color: #000000;
+  text-decoration: none;
+}
+.text-center.blurb{
+  height: 60px;
+}
+#wrap {
+  height: auto !important;
+  height: 100%;
+  padding: 50px 0 60px;
+  margin-bottom: -70px;
+  min-height: 100%;
+  background: #E6E9ED;
+}
+.page-header {
+  margin: 0 0 20px;
+}
+nav.filter h4 {
+  border-radius: 3px;
+}
+nav.filter h4 a.toggle {
+  text-decoration: none;
+}
+.jumbotron {
+  height: 300px;
+  padding: 40px;
+  border-bottom: 1px solid #cccccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.35);
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+.jumbotron h1 {
+  font-weight: bold;
+}
+.jumbotron p{
+  font-size: 25px;
+  padding-left: 147px;
+  font-weight: bold;
+}
+.dropdown-menu > li a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: #333;
+  white-space: nowrap;
+}
+.dropdown-menu form {
+  padding: inherit;
+}
+#id_email{
+  width: 300px;
+}
+/*#search_input {
+  margin-left: 150px;
+}*/
+/* Profile */
+.resource-list {
+  list-style: none;
+}
+.resource-list > li {
+  padding: 3px;
+}
+.resource-list .resource-description > h5 {
+  margin: 2px;
+}
+.resource-list .resource-thumbnail {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: 100px;
+}
+.resource-list .resource-thumbnail img {
+  max-width: 50px;
+  border-radius: 3px;
+  margin-top: 3px;
+}
+.select2-container {
+  width: 250px;
+}
+.small-text {
+  font-size: 13px;
+}
+.user-avatar img {
+  border-radius: 3px;
+}
+.fa-layers {
+  transform:rotate(50deg) skewX(24deg) skewY(12deg);
+  -webkit-transform:rotate(50deg) skewX(24deg) skewY(12deg);
+  -ms-transform:rotate(50deg) skewX(24deg) skewY(12deg);
+}
+.fa-hero {
+  top: 25px;
+  vertical-align: inherit;
+
+}
+.stacked {
+  margin-top: 28px;
+}
+
+/* Hacks */
+input[value='Invite User'] {
+  margin-top: 10px;
+}
+span[id^="error_"].help-inline {
+  color: #d9534f;
+}
+
+resource-cart span.cart-label {
+    display: inline-block;
+    overflow: hidden;
+}
+
+
+@media screen and (min-width: 960px) {
+    resource-cart span.cart-label {
+        max-width: 150px;
+    }
+}
+
+@media screen and (min-width: 1200px) { 
+    resource-cart span.cart-label {
+        max-width: 200px;
+    }
+}
+
+.thumbnail {
+    max-width: 100px;
+    max-height: 100px;
+}

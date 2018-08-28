@@ -1,0 +1,358 @@
+.navbar-nav .dropdown-menu .divider {
+    background-color: #384056;
+}
+
+body {
+    padding-top: 50px;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 15px;
+    font-weight: 300;
+    color: #dedede !important;
+}
+
+.dropdown-menu > li > a {
+    font-size: 15px;
+    font-weight: 300;
+}
+
+a.navbar-brand {
+    height: 45px;
+    background-size: 65%;
+}
+
+.navbar-inverse, .modal-header {
+    background: #262c3a;
+    background: linear-gradient(107deg, #262c3a 8%, #29648e 140%);
+}
+
+
+.navbar-nav .dropdown-menu {
+    background-color: #262c3a !important;
+}
+
+.navbar-nav .search {
+    top: 10px;
+    margin-left: 25px;
+    margin-right: 0;
+}
+
+.navbar-nav .search input {
+    font-weight: 300;
+    font-style: italic;
+    font-size: 15px;
+}
+
+.navbar-nav .search .fa-search:hover {
+    color: #777777;
+}
+
+.navbar-nav {
+    float: right;
+}
+
+.dropdown-toggle .fa-caret-down {
+    font-size: 12px;
+    margin-left: 3px;
+}
+
+.dropdown-toggle .fa-caret-down:hover {
+    color: white;
+}
+
+.navbar-nav .avatar img {
+    border: 1px solid #313b52;
+    height: 25px;
+    width: 25px;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus,
+.navbar-inverse .navbar-nav > .open > a {
+    background-color: transparent !important;
+    color: white !important;
+}
+
+.shim, .footer {
+    background-color: #273b51 !important;
+}
+
+.home #showcase .col-md-3 img {
+    border: 1px solid #dbddde;
+    padding: 8px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 500 !important;
+}
+
+.shim {
+    padding-bottom: .5em;
+    padding-top: .5em;
+}
+
+.jumbotron > div {
+    min-height: 80px;
+}
+
+.jumbotron > .container > .search {
+
+    left: 0;
+    position: relative;
+    color: #444;
+    top: 20px;
+    padding-bottom: 2em;
+    margin: auto;
+    width: 50%;
+}
+
+.jumbotron > .container > h1 {
+    text-align: center;
+    font-size: 41px;
+}
+
+#search span {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+}
+
+.jumbotron #search_input {
+    text-indent: 64px;
+    width: 100%;
+    height: 56px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    outline-width: 0;
+    font-size: 1.5em;
+}
+
+/* Social Login Buttons*/
+
+.btn-google {
+    color: #fff;
+    background-color: #dd4b39;
+    border-color: rgba(0,0,0,0.2);
+}
+
+.btn-google:hover {
+    color:#fff;
+    background-color:#c23321;
+    border-color:rgba(0,0,0,0.2);
+    text-decoration: none;
+}
+
+.btn-facebook {
+    color: #fff;
+    background-color: #3b5998;
+    border-color: rgba(0,0,0,0.2);
+}
+
+.btn-facebook:hover {
+    color:#fff;
+    background-color:#2d4373;
+    border-color:rgba(0,0,0,0.2);
+    text-decoration: none;
+}
+
+.btn-auth0 {
+    color:#fff;
+    background-color: #eb5424;
+    border-color:rgba(0,0,0,0.2);
+    text-decoration: none;
+}
+
+.btn-auth0:hover {
+    color:#fff;
+    background-color:#eb5424;
+    border-color:rgba(0,0,0,0.2);
+    text-decoration: none;
+}
+
+.btn-geoaxis {
+    color:#fff;
+    background-color: #16aa3e;
+    border-color:rgba(0,0,0,0.2);
+    text-decoration: none;
+}
+
+
+.btn-geoaxis:hover {
+    color:#fff;
+    background-color:#008000;
+    border-color:rgba(0,0,0,0.2);
+    text-decoration: none;
+}
+
+.btn-social {
+    position: relative;
+    padding-left: 44px;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 5px;
+    text-decoration: none;
+    font-weight: 300;
+    font-size: 15px;
+    max-width: 270px;
+}
+
+.btn-social>:first-child {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+    line-height: 34px;
+    font-size: 1.6em;
+    text-align: center;
+    border-right: 1px solid rgba(0,0,0,0.2);
+}
+
+.login-warning {
+    width: 100%;
+    margin: 1em 0;
+    padding: 2em;
+    background-color: #fff;
+    text-align: left;
+    box-shadow: 0 0 0 5px rgba(0,0,0,.03), inset 0 0 0 1px;
+}
+
+.login-root {
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+}
+
+.modal-header {
+    color: white;
+}
+
+#datasets{
+    background: url("/static/img/texture.png");
+}
+
+.item-thumb {
+    text-align: center;
+}
+
+.item-thumb .thumbnail {
+    display: inline-block;
+}
+
+.thumbnail {
+    max-width: 200px;
+    max-height: 150px;
+    margin-top: 20px;
+    border: 0px solid #ddd;
+}
+
+.btn-ws {
+    margin-top:10px;
+}
+
+.tokenfield.form-control {
+    height: auto;
+}
+
+.tokenfield .token {
+    width: 100%; 
+    clear: both;
+}
+
+
+.dataset-resources {
+    margin-top: 8px
+}
+
+.dataset-resources li a:hover
+{
+    color:#af0900;
+}
+
+.dataset-resources li {
+    display: inline-flex;
+}
+
+.profile-avatar {
+    padding: 15px;
+}
+
+
+.home .jumbotron a {
+    color: #444444 !important;
+}
+
+.import-wizard-button {
+    text-align: center;
+}
+
+.gray-container {
+    text-align: center;
+    margin: 0px;
+    padding: 30px 20px 60px;
+    background-color: #eee;
+    border-radius: 6px;
+    height: 270px;
+}
+
+.modal-body {
+    position: relative;
+    padding: 30px 30px;
+}
+
+.steps-indicator {
+    margin-top: 0px !important;
+}
+
+.import-options-form {
+    margin-top: 0px !important;
+}
+
+.cartItem {
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    display: block; 
+    margin-right: 25px;
+}
+.cartButton {
+    margin-top: -25px;
+}
+
+#bulk_perms_button, #open_in_map_button {
+    white-space: pre-line;
+    width: 100%;
+}
+
+#bulk_perms_button_container, #open_in_map_button_container {
+    width: 100%;
+}
+
+/* GeoNode Viewer Feature Removal */
+.sdk-component .ms.ms-style {
+    display: none;
+}
+
+#globe-button {
+    display: none;
+}
+
+#print-button {
+    top: 189px;
+}
+
+/* Fix Homepage Categories */
+.home #datasets a .category {
+    margin: 0 auto;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}

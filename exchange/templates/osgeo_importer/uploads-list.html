@@ -1,0 +1,43 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+
+{% block extra_script %}
+    {% include 'osgeo_importer/_importer_scripts.html' %}
+    {% include 'osgeo_importer/_importer_styles.html' %}
+    {{ block.super }}
+{% endblock %}
+
+{% block body_outer %}
+
+<div class="page-header">
+  <a href="{% url 'uploads-new' %}"><div class="pull-right" style="margin-top: 25px; font-size: 14px">Add Data</div></a>
+  <h2 class="page-title">{% trans "Manage Your Data" %}</h2>
+</div>
+
+<div class="container" ng-app="osgeoImporter.uploader" ng-controller="uploadList">
+    <div class="row">
+        <div class="col-md-8">
+            <div ng-show="loading" style="margin-right: 50%; margin-left: 50%; margin-top: 30px; margin-bottom: 30px">
+                <i class="fa fa-spinner fa-spin fa-3x"></i>
+            </div>
+            {% verbatim %}
+            <div class="layer-upload-counts">
+                <span ng-show="uploads.length === 0">
+                    There are currently no uploads in the database.
+                </span>
+                <span ng-show="uploads.length === 1">
+                    Showing 1 upload<span ng-show="totalItems > 1"> of {{ totalItems }}</span>.
+                </span>
+                <span ng-show="uploads.length > 1">
+                    Showing uploads {{ offset ? offset : 1 }}-{{ offset+uploads.length }} of {{ totalItems }}.
+                </span>
+            </div>
+            {% endverbatim %}
+            <div ng-repeat="upload in uploads">
+                <upload upload-object="upload" i="$index" static-url="{{STATIC_URL|default_if_none:"/static"}}" template-url="{{ STATIC_URL|default_if_none:'/static/' }}osgeo_importer/partials/upload.html"></upload>
+            </div>
+            <pagination total-items="totalItems" ng-init="init('{{user.username}}')" ng-change="pageChanged()" max-size="7" class="pagination-sm" items-per-page="limit" ng-model="currentPage"></pagination>
+        </div>
+    </div>
+</div>
+{% endblock %}

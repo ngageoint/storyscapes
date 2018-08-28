@@ -1,0 +1,62 @@
+[
+    {
+        "pk": 1,
+        "model": "people.profile",
+        "fields": {
+            "profile": null,
+            "last_name": "Exchange",
+            "is_staff": true,
+            "user_permissions": [],
+            "date_joined": "2016-04-26T14:17:09.953",
+            "city": null,
+            "first_name": "Administrator",
+            "area": null,
+            "zipcode": null,
+            "is_superuser": true,
+            "last_login": "2016-04-26T14:18:01.256",
+            "email": "admin@exchange.com",
+            "username": "admin",
+            "fax": null,
+            "is_active": true,
+            "delivery": null,
+            "groups": [
+                1
+            ],
+            "organization": null,
+            "password": "pbkdf2_sha256$12000$ASdvqNLCdwUd$6FBtjUga0lj2Iq78hyA0iztSUCgFKzxtAMysr1D4WIY=",
+            "country": null,
+            "position": null,
+            "voice": null
+        }
+    },
+    {
+        "pk": 2,
+        "model": "people.profile",
+        "fields": {
+            "profile": null,
+            "last_name": "User",
+            "is_staff": false,
+            "user_permissions": [],
+            "date_joined": "2016-04-26T14:17:13.705",
+            "city": null,
+            "first_name": "Test",
+            "area": null,
+            "zipcode": null,
+            "is_superuser": false,
+            "last_login": "2016-04-26T14:17:13.705",
+            "email": "test@exchange.com",
+            "username": "test",
+            "fax": null,
+            "is_active": true,
+            "delivery": null,
+            "groups": [
+                1
+            ],
+            "organization": null,
+            "password": "pbkdf2_sha256$12000$eaY3wZWxxbhE$iUAk/R6aZmBKNMryFWBQd+Ouvbw9tsPAmK6HbRCPoow=",
+            "country": null,
+            "position": null,
+            "voice": null
+        }
+    }
+]

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load theme_tags %}
+{% load classification_banner i18n %}
+{% load static from staticfiles %}
+
+{% block extra_head %}
+  {% get_theme as theme %}
+  <link href="{% static "theme/css/site_base.css"%}" rel="stylesheet"/>
+
+  <link rel="shortcut icon" href="{% static "theme/favicon.ico"%}">
+  <link rel="apple-touch-icon" href="{% static "theme/img/icons/pngs/256x256.png"%}" />
+
+  <style>
+    {% if theme.banner_logo %}
+        a.navbar-brand {
+            background: url('{{ theme.banner_logo_url }}')  0 10px no-repeat;
+            {% ifequal theme.name  "GEOINT" %}
+                background-size: 30%;
+            {% else %}
+                background-size: 65%;
+            {% endifequal %}
+        }
+    {% else %}
+        .navbar-brand {
+            background: url('{% static "theme/img/default-banner-logo.png"%}') 0 10px no-repeat;
+        }
+    {% endif %}
+    {% if theme.running_hex %}
+        @media (max-width: 991px) {.home .navbar-inverse {
+            background: #{{ theme.running_hex }};
+        }}
+        body, .navbar-nav .dropdown-menu, .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus, .home .big-search, footer.footer {
+            background-color: #{{ theme.running_hex }};
+        }
+    {% else %}
+        @media (max-width: 991px) {.home .navbar-inverse {
+            background: #0F1A2C;
+        }}
+        body, .navbar-nav .dropdown-menu, .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus, .home .big-search, footer.footer {
+            background-color: #0F1A2C;
+        }
+    {% endif %}
+    {% if theme.running_text_hex %}
+        .navbar-inverse .navbar-nav > li > a, .footer .container .row {
+            color: #{{ theme.running_text_hex }};
+        }
+    {% else %}
+        .navbar-inverse .navbar-nav > li > a, .footer .container .row {
+            color: #FFFFFF;
+        }
+    {% endif %}
+    {% if theme.hyperlink_hex %}
+        a, a:hover, .home .big-search .btn-default, footer a, footer a:hover, footer a:visited, .home #datasets a .category:hover, .fa:hover, .home #datasets h4:hover, .home #showcase a{
+            color: #{{ theme.hyperlink_hex }};
+        }
+    {% else %}
+        a, a:hover, .home .big-search .btn-default, footer a, footer a:hover, footer a:visited, .home #datasets a .category:hover, .fa:hover, .home #datasets h4:hover, .home #showcase a{
+            color: #FF8F4C;
+        }
+    {% endif %}
+  </style>
+{% endblock %}
+
+{% block header %}
+    {% if classification_banner_enabled %}
+        <link href="{% static "css/django_classification_banner_overrides.css"%}" rel="stylesheet"/>
+        {% classification_banner %}
+    {% endif %}
+    {{ block.super }}
+{% endblock %}

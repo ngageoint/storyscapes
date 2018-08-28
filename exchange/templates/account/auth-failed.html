@@ -1,0 +1,12 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+
+{% block body %}
+
+<div id="description" style="min-height: 300px;">
+    <h3>{% trans "Access Denied" %}</h3>
+ {{ SITE_NAME}} needs permission to access resources in your organization
+ that only an administrator can grant. Please ask an administrator to grant
+ permission to this application before you can use it.
+</div>
+{% endblock %}

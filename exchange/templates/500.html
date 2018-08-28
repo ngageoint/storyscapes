@@ -1,0 +1,12 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+
+{% block body %}
+
+<div id="description" style="min-height: 300px;">
+    <h3>{% trans "An unexpected error has occurred" %}</h3>
+{% blocktrans %}
+ There was a problem loading this page. Please check input and try again.
+{% endblocktrans %}
+</div>
+{% endblock %}
