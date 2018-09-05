@@ -78,6 +78,10 @@ Edit or add metadata
 
   .. figure:: img/data-quality.png
 
+**Group** - From the drop-down menu, select which group has permission to access this data.
+
+  .. figure:: img/group.png
+
 Select the checkboxes for the options you’d like to turn on/off.
 
   .. figure:: img/checkboxes.png
@@ -93,20 +97,6 @@ Ensure the box is checked if:
   * The vector has a time attribute that you’d like to enable for temporal viewing
   * The raster has associated elevation information
 
-**Category** - Data is divided into categories, which assists in the grouping and search of available geographic datasets. These categories correspond to those on the Exchange homepage.
-
-  .. figure:: img/category.png
-
-**Attributes (layers only)** - All of the attributes for a layer will be listed. Edits can be made to the Label, Description, and Display Order fields.
-
-  .. figure:: img/attributes.png
-
-  Click your mouse in the field you’d like to edit, and make your changes. You can select the up or down buttons in the Display Order field to change the order of where the attribute will display in the attribute list.
-
-**Note:** If you change the order of one attribute, make sure you have changed the corresponding attribute to prevent duplicates.
-
-  Select the checkbox beneath the Visible column to turn off/on the visibility of an attribute. This will affect the attribute visibility on the map.
-
 **Link to (documents only)** - Select a map or layer in the drop down list. This will associate the document to that resource.
 
   .. figure:: img/link-to.png
@@ -114,6 +104,10 @@ Ensure the box is checked if:
 **Regex (layers only)** - Select the regular expression for the time and/or elevation of raster data.
 
   .. figure:: img/regex.png
+  
+**Service** - To link the layer to an existing remote service, select it from the drop-down menu.
+
+  .. figure:: img/service.png
 
 **Site URL and Featured Map URL (maps only)** -
 
@@ -128,5 +122,42 @@ Ensure the box is checked if:
 **Note:** You are not able to edit the Owner, Point of Contact or Metadata Author.
 
   .. figure:: img/poc.png
+
+  
+**Category** - Data is divided into categories, which assists in the grouping and search of available geographic datasets. These categories correspond to those on the Exchange homepage.
+
+  .. figure:: img/category.png
+
+**Attributes (layers only)** - All of the attributes for a layer will be listed. Edits can be made to the Label, Description, and Display Order fields.
+
+  .. figure:: img/attributes.png
+
+Click your mouse in the field you’d like to edit, and make your changes. You can select the up or down buttons in the Display Order field to change the order of where the attribute will display in the attribute list.
+
+**Note:** If you change the order of one attribute, make sure you have changed the corresponding attribute to prevent duplicates.
+
+Select the checkbox beneath the Visible column to turn off/on the visibility of an attribute. This will affect the attribute visibility on the map.
+
+Select the checkbox beneath the Required column to require users to input a value for that attribute.
+
+Select the checkbox beneath the Readonly column to ensure no one else can modify the attribute or its values.
+
+**Constraints** - Attribute values can be edited to establish minimums and maximums for the data. This helps prevent data inconsistency, as well as ensures the values fall within the expected ranges. 
+
+For our example, we are using the surface attribute to clarify whether a bike path is paved or unpaved. We want to ensure the attribute value added is limited to those two options. This provides continuity, and reduces ambiguity among answers (*e.g.* gravel, cement, dirt).
+
+Click the orange carrot next to the field to implement constraints.
+
+  .. figure:: img/constraints.png
+  
+Select the Control Type drop-down menu, and choose the option which best represents the way you’d like to represent the options.
+
+  .. figure:: img/control-type.png
+  
+Select the blue Options :guilabel:`( + )`  button to add the values and labels for the data. In the example, we use **1** to represent a paved path, and **2** to represent an unpaved path.
+
+When a user edits that value from the map, the are only presented with two values, and cannot add one that is unexpected. Note: Please see the Edit attributes section in Editing and Version Management for more information.
+
+  .. figure:: img/map-edit.png
 
 4. When you’re finished, click the :guilabel:`Update` button to save your changes.
