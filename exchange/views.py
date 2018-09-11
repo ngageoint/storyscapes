@@ -16,8 +16,38 @@ from pip._vendor import pkg_resources
 from exchange.tasks import create_record, delete_record
 from django.core.urlresolvers import reverse
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth import login
+from social_django.utils import psa
+
 
 logger = logging.getLogger(__name__)
+
+
+#
+#   url(r'^register-by-token/(?P<backend>[^/]+)/$',
+#       'register_by_access_token')
+
+@psa('social:complete')
+def register_by_access_token(request, backend):
+    provider = request.backend
+    user = None
+    error_message = {'error': 'Invalid Token'}
+    try:
+        if 'geonode_anywhere' in settings.INSTALLED_APPS:
+            from geonode_anywhere.views import process_request
+            token = process_request(request)
+            user = provider.do_auth(token)
+
+        if user:
+            login(request, user)
+            return JsonResponse({'access_token':
+                                 request.session['access_token']})
+        else:
+            return JsonResponse(error_message)
+
+    except Exception as e:
+        logger.error(e)
+        return JsonResponse(error_message)
 
 
 def home_screen(request):
@@ -154,6 +184,10 @@ def capabilities(request):
         'geonode': get_geonode_version(),
         'geoserver': get_geoserver_version(),
     }
+
+    if 'geonode_anywhere' in settings.INSTALLED_APPS:
+        from geonode_anywhere.views import get_capabilities
+        capabilities.update(get_capabilities())
 
     current_site = get_current_site(request)
     capabilities["site_name"] = current_site.name
