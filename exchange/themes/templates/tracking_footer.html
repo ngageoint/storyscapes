@@ -11,3 +11,7 @@
   gtag('config', '{{ GOOGLE_ANALYTICS_ID }}');
 </script>
 {% endif %}
+
+{% if theme.custom_analytics %}
+  {{ theme.custom_analytics | safe }}
+{% endif %}

@@ -130,6 +130,10 @@ class Theme(models.Model):
         null=True,
         blank=True
     )
+    custom_analytics = models.TextField(
+        null=True,
+        blank=True
+    )
 
     def __unicode__(self):
         return self.name
