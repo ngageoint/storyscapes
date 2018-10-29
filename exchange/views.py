@@ -547,6 +547,7 @@ def new_map_config(request):
                 if bbox is None:
                     bbox = list(layer_bbox[0:4])
                 else:
+                    bbox = list(bbox)
                     bbox[0] = min(bbox[0], layer_bbox[0])
                     bbox[1] = max(bbox[1], layer_bbox[1])
                     bbox[2] = min(bbox[2], layer_bbox[2])
