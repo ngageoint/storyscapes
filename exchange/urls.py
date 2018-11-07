@@ -62,6 +62,8 @@ urlpatterns = patterns(
     url(r'^proxy/', views.proxy),
 
     (r'^services/', include('exchange.remoteservices.urls')),
+
+    url(r'^layers/create/$', views.layer_create, name='layer_create'),
 )
 
 if 'ssl_pki' in settings.INSTALLED_APPS:

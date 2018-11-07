@@ -18,7 +18,6 @@ from django.core.urlresolvers import reverse, resolve
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth import login
 from social_django.utils import psa
-from django.utils.translation import ugettext as _
 from geonode.utils import llbbox_to_mercator, bbox_to_projection
 from geonode.utils import forward_mercator, build_social_links
 from geonode.utils import default_map_config, GXPLayer, GXPMap
@@ -39,6 +38,12 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models import F
+from django.contrib.auth.decorators import login_required
+from django.template.defaultfilters import slugify
+from geonode.contrib.createlayer.utils import create_layer
+from geonode.contrib.createlayer.forms import NewLayerForm
+from django.utils.translation import ugettext as _
+from geonode.people.models import Profile
 
 if 'geonode.geoserver' in settings.INSTALLED_APPS:
     from geonode.geoserver.helpers import ogc_server_settings
@@ -937,3 +942,41 @@ def handler500(request):
 
 class AuthErrorPage(TemplateView):
     template_name = 'account/auth-failed.html'
+
+
+@login_required
+def layer_create(request, template='createlayer/layer_create.html'):
+    """
+    Create an empty layer.
+    """
+    error = None
+    profile = Profile.objects.get(username=request.user.username)
+    if request.method == 'POST' and \
+            (profile.has_perm('layers.add_layer') is True or
+             profile.is_staff is True or profile.is_superuser is True):
+        form = NewLayerForm(request.POST)
+        if form.is_valid():
+            try:
+                name = form.cleaned_data['name']
+                name = slugify(name.replace(".", "_"))
+                title = form.cleaned_data['title']
+                geometry_type = form.cleaned_data['geometry_type']
+                attributes = form.cleaned_data['attributes']
+                permissions = form.cleaned_data["permissions"]
+                layer = create_layer(name, title, request.user.username,
+                                     geometry_type, attributes)
+                layer.set_permissions(json.loads(permissions))
+                return HttpResponseRedirect(
+                    '/maps/new?layer=%s' % layer.typename)
+            except Exception as e:
+                error = '%s (%s)' % (e.message, type(e))
+    else:
+        form = NewLayerForm()
+
+    ctx = {
+        'form': form,
+        'is_layer': True,
+        'error': error
+    }
+
+    return render_to_response(template, RequestContext(request, ctx))

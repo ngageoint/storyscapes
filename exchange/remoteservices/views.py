@@ -38,6 +38,7 @@ from django.conf import settings
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from geonode.services.views import _gen_harvestable_ids
 from django.template import RequestContext
+from geonode.people.models import Profile
 
 logger = logging.getLogger("geonode.core.layers.views")
 
@@ -45,7 +46,10 @@ logger = logging.getLogger("geonode.core.layers.views")
 @login_required
 def register_service(request):
     service_register_template = "services/service_register.html"
-    if request.method == "POST":
+    profile = Profile.objects.get(username=request.user.username)
+    if request.method == 'POST' and \
+            (profile.has_perm('services.add_service') is True or
+             profile.is_staff is True or profile.is_superuser is True):
         form = ExchangeCreateServiceForm(request.POST)
         if form.is_valid():
             service_handler = form.cleaned_data["service_handler"]
