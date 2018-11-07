@@ -37,6 +37,7 @@ Django==1.8.18
 six==1.10.0
 cryptography==2.3
 urllib3==1.23
+regex==2018.11.03
 
 # For pki app
 # should be with [secure] for pyOpenSSL, cryptography, etc. for modern SSL
