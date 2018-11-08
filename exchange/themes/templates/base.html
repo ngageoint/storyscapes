@@ -69,7 +69,9 @@
                   {% if perms.documents.add_document == True or user.is_staff == True or user.is_superuser == True %}
                   <li><a href="{% url "document_upload" %}" id="upload-document">{% trans "Upload Document" %}</a></li>
                   {% endif %}
+                  {% if perms.layers.add_layer == True or perms.documents.add_document == True or user.is_staff == True or user.is_superuser == True %}
                   <li role="separator" class="divider"></li>
+                  {% endif %}
                   <li><a href="{% url "services" %}">{% trans "Manage Remote Services" %}</a></li>
                 </ul>
               </li>
