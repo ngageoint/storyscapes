@@ -1,2 +1,0 @@
-include README.rst
-recursive-include exchange *.js *.css *.png *.eot *.woff *.tff *.svg *.html *.xml *.json *.gif *.txt

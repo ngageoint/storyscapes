@@ -1,0 +1,32 @@
+{% extends "site_base.html" %}
+{% load threadedcomments_tags %}
+{% load fluent_comments_tags %}
+{% load mapstory_tags %}
+{% load avatar_tags %}
+
+{% block middle %}
+<div class="container">
+    <div class="row blog-entry-banner">
+        {% include "journal/_entry_title.html" %}
+    </div>
+    <div class="row">
+        <div class="blog-content col-sm-8 col-sm-offset-4">
+            {{ entry.html|safe }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-4">
+        <article id="comments" class="tab-pane">
+            {% with entry as resource %}
+                {% render_comment_list for resource %}
+                {% if user.is_authenticated %}
+                <div class="col-xs-10 col-xs-offset-2">
+                    {% render_comment_form for resource %}
+                </div>
+                {% endif %}
+            {% endwith %}
+        </article>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "viewer/view_base.html" %}
+
+{% load i18n %}
+
+{% block title %} {% trans "Viewer" %} - {{ block.super }} {% endblock %}
+
+{% block head %}
+{{ block.super }}
+<link href="{{ STATIC_URL }}style/themes/{{THEME}}/site-theme.css" rel="stylesheet" />
+<link href="{{ STATIC_URL }}style/themes/{{THEME}}/maps-theme.css" rel="stylesheet" />
+{% endblock head %}
+
+{% block middle %}
+<div ng-app="viewer" ng-controller="viewerController as viewer">
+    <div class="st-legend"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="viewer-nav">
+            <a target="_blank" href="{% url "home" %}">
+                {% if site.assets.favicon %}
+                    <img src="/uploaded/{{ site.assets.favicon.name }}" width="35px" height="35px"/>
+                    {% comment %}<img src="https://res.cloudinary.com/dw1zyrzc5/image/upload/v1461606100/ms_logo_white_pot8b9.png" id="sidebarDropdown" width="35px" height="35px"/>{% endcomment %}
+                {% else %}
+                    <i class="fa fa-home pull-left"></i>
+                {% endif %}
+            </a>
+            <i class="fa fa-caret-left" ng-click="toggleSidebar()"></i>
+            <div class="expand-button">
+                <p>Story Info</p>
+                <i class="fa fa-caret-right" ng-click="toggleSidebar()"></i>
+            </div>
+        </div>
+        <div class="content">
+            {% verbatim %}
+            <a target="_blank" href="/story/{{ mapManager.detail_url }}/view" class="viewer-story-title" ng-bind="mapManager.title"></a>
+            <a target="_blank" href="/storyteller/{{ mapManager.username }}" class="viewer-author">MapStory by {{ mapManager.owner }}</a>
+            <div class="viewer-chapter-number">Chapter {{ mapManager.storyChapter}}</div>
+            <div class="viewer-chapter-title" ng-bind="mapManager.storyMap.getStoryTitle()"></div>
+            <p ng-bind="mapManager.storyMap.getStoryAbstract()"></p>
+            {% endverbatim %}
+
+            <div ng-if="mapManager.chapterCount > 1" class="viewer-chapter-nav">
+                <a class="pointer" ng-click="previousChapter()" ng-disabled="mapManager.storyChapter == 1">
+                    <i class="fa fa-step-backward"></i>
+                    Previous Chapter
+                </a>
+                <a class="pointer" ng-click="nextChapter()" ng-disabled="mapManager.storyChapter == mapManager.chapterCount">
+                    Next Chapter
+                    <i class="fa fa-step-forward"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="map" id="mapContainer">
+        <div id="map"></div>
+        <div id="footer" class="footer">
+            <div id="time-controls-panel2" ng-show="timeControlsManager.timeControls" class="floating-below">
+                <div class="navbar" ng-controller="tileProgressController">
+                    <st-playback-controls class="pull-left" playback-options="playbackOptions"
+                                          time-controls="timeControlsManager.timeControls"></st-playback-controls>
+                    <progressbar animate="false" class="navbar-nav navbar-right" value="tilesLoadedProgress">
+                        <b ng-if="tilesLoaded" ng-bind="tilesLoaded + '/' + tilesToLoad"></b>
+                    </progressbar>
+                </div>
+                <div id="playback-settings" class="panel-collapse collapse">
+                    <div class="panel-heading">Playback Options</div>
+                    <st-playback-settings playback-options="playbackOptions"
+                                          time-controls="timeControlsManager.timeControls"></st-playback-settings>
+                </div>
+                <div id="timeline" style="display:none;"></div>
+            </div>
+        </div>
+    </div>
+    <div featureinfobox id="info-box" ng-show="featureInfoService.getSelectedItem() && featureInfoService.getEnabled()"
+        class="feature-info-box-popup">
+   </div>
+</div>
+{% endblock middle %}
+{% block extra_script %}
+<script src="{{ STATIC_URL }}vendor/jquery/dist/jquery.min.js"></script>
+<script src="{{ STATIC_URL }}vendor/story-tools/dist/story-tools-vendor-all.js"></script>
+<script src="{{ STATIC_URL }}vendor/story-tools/dist/story-tools-core-all.js"></script>
+<script src="{{ STATIC_URL }}vendor/story-tools/dist/story-tools-mapstory.js"></script>
+{% include 'viewer/ol3-popup.js' %}
+{% include 'viewer/story_viewer.js' %}
+{% endblock extra_script %}

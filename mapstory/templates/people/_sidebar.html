@@ -1,0 +1,72 @@
+{% load i18n %}
+
+{% if profile.profile %}
+    <div class="sidebar-header"><h3>About</h3></div>
+    <div class="sidebar-content">{{ profile.profile }}</div>{% endif %}
+{% if profile.city or profile.country %}
+    <div class="sidebar-header"><h3>Location</h3></div>
+    {% if profile.city %}
+        <div class="sidebar-content">{{ profile.city }}</div>
+    {% endif %}
+    {% if profile.country %}
+        <div class="sidebar-content">{{ profile.country }}</div>
+    {% endif %}
+{% endif %}
+{% if profile.mapstoryprofile.education %}
+    <div class="sidebar-header"><h3>Education</h3></div>
+    <div class="sidebar-content">{{ profile.mapstoryprofile.education }}</div>
+{% endif %}
+{% if profile.mapstoryprofile.expertise %}
+    <div class="sidebar-header"><h3>Expertise</h3></div>
+    <div class="sidebar-content">{{ profile.mapstoryprofile.expertise }}</div>
+{% endif %}
+{% if interests != "[]" %}
+    <div class="sidebar-header"><h3>Interests</h3></div>
+    <md-content>
+        <md-chips ng-model="interestChips" readonly="true" md-removable="false" md-max-chips="20">
+        </md-chips>
+    </md-content>   
+{% endif %}
+{% if user.Volunteer_Technical_Community %}
+    <div class="sidebar-content"><p>Volunteer Technical Community Member</p></div>
+{% endif %}
+
+<!-- contact profile -->
+<div class="sidebar-header"><h3>Contact</h3></div>
+    {% if user != profile %}
+    <a href='{% url "message_create" user_id=profile.pk %}' class="btn btn-primary">message</a>
+    {% endif %}
+{% comment %}
+TODO: change help text in /geonode/geonode/people/models.py to encourage correct format of handle for each link or init a controller that checks what is given and creates these links accordingly {% endcomment %}
+{% if profile.mapstoryprofile.social_twitter %}
+    <div class="sidebar-content">
+        <a href="https://twitter.com/{{ profile.mapstoryprofile.social_twitter }}"><i class="fa fa-twitter"></i> {{ profile.mapstoryprofile.social_twitter }}
+        </a>
+    </div>
+{% endif %}
+{% if profile.mapstoryprofile.social_facebook %}
+    <div class="sidebar-content">
+        <a href="https://www.facebook.com/{{ profile.mapstoryprofile.social_facebook }}"><i class="fa fa-facebook"></i> {{ profile.mapstoryprofile.social_facebook }}</a>
+    </div>
+{% endif %}
+{% if profile.mapstoryprofile.social_linkedin %}
+    <div class="sidebar-content">
+        <a href="https://www.linkedin.com/in/{{ profile.mapstoryprofile.social_linkedin }}"><i class="fa fa-linkedin"></i> {{ profile.mapstoryprofile.social_linkedin }}</a>
+    </div>
+{% endif %}
+{% if profile.mapstoryprofile.social_github %}
+    <div class="sidebar-content">
+        <a href="https://github.com/{{ profile.mapstoryprofile.social_github }}"><i class="fa fa-github"></i> {{ profile.mapstoryprofile.social_github }}</a>
+    </div>
+{% endif %}
+
+{% if user == profile %}
+    <div style= "padding-top: 40px">
+        <button class="btn btn-danger"><a href="{% url "profile_delete" user.username %}">{% trans "delete profile" %}</a> </button>
+    </div>
+{% endif %}
+
+{# storing interests from the ctx dictionary in js scope to be available in profile.controller.js for chip generation #}
+<script>
+    var interests = {{interests|safe}};
+</script>

@@ -1,0 +1,479 @@
+.logo-wrapper {
+    position: relative;
+    width: 200px;
+    margin-top: 5px;
+}
+
+h1.site-title {
+    width: 200px;
+    height: 45px;
+    text-indent: -9999px;
+    margin: 0;
+    float: left;
+}
+
+.beta-tag {
+    text-transform: uppercase;
+    font-family: "Lato", Helvetica, sans-serif;
+    clear: both;
+    color: @gray-500;
+    font-size: 10px;
+    position: absolute;
+    top: 27px;
+    right: 16px;
+}
+
+.nav-avatar {
+    display: none;
+
+    @media @desktops {
+        display: inline;
+        width: 25px;
+        border-radius: 50%;
+        margin: 2px 8px 8px 8px;
+    }
+}
+
+li.divider {
+    @media @desktops {
+        background-color: @navigation-divider-color;
+        margin-right: 15px;
+        height: 1px;
+    }
+}
+
+header.navigation {
+    @base-border-radius: 6px;
+    @navigation-padding: 1em;
+    @navigation-height: 50px;
+    @navigation-submenu-padding: 1em;
+    @navigation-submenu-width: 12em;
+
+    background: @navigation-background-fallback; // Fallback for IE9 since it doesn't support gradients
+    background: @navigation-background;
+    min-height: @navigation-height;
+    width: 100%;
+    z-index: 999;
+
+    .navigation-wrapper {
+        clear: both;
+        position: relative;
+        // Modals have z-index 1050, so anything > 1050 will show menus
+        // and other nav elements on top of modals, which is bad
+        z-index: 1000;
+    }
+
+    // Mobile view
+
+    .navigation-menu-button {
+        font-family: @base-font-family;
+        font-weight: 400;
+        font-size: 0.85em;
+        color: @navigation-color;
+        display: block;
+        float: right;
+        line-height: @navigation-height;
+        margin: 0;
+        padding-right: 1em;
+        text-decoration: none;
+        text-transform: uppercase;
+
+        @media @desktops {
+            display: none;
+        }
+
+        &:focus,
+        &:hover {
+            color: @navigation-color-hover;
+        }
+    }
+
+    // Nav menu
+
+    nav {
+        float: none;
+        min-height: @navigation-height;
+        z-index: 9999999;
+
+        @media @desktops {
+            float: right;
+
+        }
+    }
+
+    ul.navigation-menu {
+        clear: both;
+        display: none;
+        margin: 0 auto;
+        overflow: visible;
+        padding: 0;
+        width: 100%;
+        z-index: 9999;
+
+        &.show {
+            display: block;
+        }
+
+        @media @desktops {
+            display: inline;
+            margin: 0 0 0 40px;
+            padding: 0;
+        }
+    }
+
+    // The nav items
+
+    ul li.nav-link {
+        font-family: @base-font-family;
+        font-weight: 400;
+        font-size: 0.85em;
+        display: block;
+        line-height: @navigation-height;
+        overflow: hidden;
+        padding-right: 0.8em;
+        text-align: left;
+        width: 100%;
+        z-index: 9999;
+
+        @media @desktops {
+            background: transparent;
+            display: inline;
+            line-height: @navigation-height;
+            text-decoration: none;
+            width: auto;
+            text-align: right;
+
+            &.mobile-menu-only {
+                display: none;
+            }
+        }
+
+        a {
+            color: @navigation-color;
+            display: inline-block;
+            text-decoration: none;
+
+            @media @desktops {
+                padding-right: 1em;
+            }
+
+            &:focus,
+            &:hover {
+                color: @navigation-color-hover;
+                &:after {
+                    color: @navigation-color-hover;
+                }
+            }
+
+            &:active {
+                color: @navigation-color-active;
+                &:after {
+                    color: @navigation-color-active;
+                }
+            }
+        }
+    }
+
+    .active-nav-item a {
+        border-bottom: 1px solid @navigation-color-active;
+        padding-bottom: 3px;
+    }
+
+    // Sub menus
+
+    li.more.nav-link {
+        padding-right: 0;
+
+        @media @desktops {
+            padding-right: @navigation-submenu-padding;
+            padding-bottom: @navigation-submenu-padding;
+        }
+
+        > ul > li:first-child a  {
+            padding-top: 5px;
+        }
+
+        a {
+            margin-right: @navigation-submenu-padding;
+        }
+
+        > a {
+            padding-right: 0.6em;
+        }
+
+        > a::after {
+            color: @navigation-color;
+            content: "\25BE";
+            position: absolute;
+            right: -5px;
+            font-size: 0.85em;
+        }
+
+        &.user-menu > a::after {
+            color: @navigation-color;
+            top: -16px;
+            right: 5px;
+        }
+
+        &.user-menu {
+            .mobile-menu-only {
+                position: relative;
+                display: inline;
+                &:after {
+                    top: -16px;
+                    right: -5px;
+                }
+            }
+
+            .desktop-menu-only {
+                display: none;
+            }
+
+            @media @desktops {
+                .mobile-menu-only {
+                    display: none;
+                }
+                .desktop-menu-only {
+                    display: inline;
+                }
+            }
+        }
+
+        &.user-menu:hover,
+        &.user-menu:focus {
+            a::after {
+                color: @navigation-color-hover;
+            }
+        }
+        &.user-menu:active {
+            a::after {
+                color: @navigation-color-active;
+            }
+        }
+    }
+
+    li.more {
+        overflow: visible;
+        padding-right: 0;
+
+        a {
+            padding-right: 0.8em;
+        }
+
+        > a {
+            padding-right: 1.6em;
+            position: relative;
+
+            @media @desktops {
+                margin-right: @navigation-submenu-padding;
+            }
+
+            &::after {
+                content: "›";
+                font-size: 1.2em;
+                position: absolute;
+                right: @navigation-submenu-padding / 2;
+            }
+        }
+
+
+        @media @desktops {
+            padding-right: 0.8em;
+            position: relative;
+        }
+    }
+
+    ul.submenu {
+        display: none;
+        padding-left: 0;
+
+        @media @desktops {
+            left: -@navigation-submenu-padding;
+            position: absolute;
+            top: 1.5em;
+            z-index: 1;
+        }
+
+        .submenu.fly-out-right {
+            @media @desktops {
+                left: @navigation-submenu-width - 0.2em;
+                top: 0;
+            }
+        }
+
+        .submenu.fly-out-left {
+            @media @desktops {
+                left: -@navigation-submenu-width + 0.2em;
+                top: 0;
+            }
+        }
+
+        .submenu {
+            @media @desktops {
+                left: @navigation-submenu-width - 0.2em;
+                top: 0;
+            }
+        }
+
+        li {
+            display: block;
+            padding-right: 0;
+            font-family: @base-font-family;
+            font-weight: 400;
+            font-size: 0.85em;
+
+            @media @desktops {
+                line-height: @navigation-height / 1.3;
+
+                &:first-child > a {
+                    border-top-left-radius: @base-border-radius;
+                    border-top-right-radius: @base-border-radius;
+                    border-style: solid;
+                    border-width: 1px;
+                    border-color: @navigation-submenu-border-color;
+                    border-bottom: 0;
+                }
+
+                &:last-child > a, &:last-child > form > a {
+                    border-bottom-left-radius: @base-border-radius;
+                    border-bottom-right-radius: @base-border-radius;
+                    padding-bottom: 0.7em;
+                    border-style: solid;
+                    border-width: 1px;
+                    border-color: @navigation-submenu-border-color;
+                    border-top: 0;
+                }
+            }
+
+            a {
+                display: inline-block;
+                text-align: left;
+                width: 100%;
+                padding-left: 30px;
+
+                @media @desktops {
+                    background-color: @navigation-background-fallback;
+                    padding-left: @navigation-submenu-padding;
+                    text-align: left;
+                    width: @navigation-submenu-width;
+                    border-style: solid;
+                    border-width: 1px;
+                    border-color: @navigation-submenu-border-color;
+                    border-top: 0;
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
+
+    // Elements on the far right
+
+    .navigation-tools {
+        clear: both;
+        display: block;
+        height: @navigation-height;
+
+        @media @desktops {
+            background: transparent;
+            clear: none;
+            float: right;
+        }
+    }
+
+    // Search bar
+
+    .search-bar {
+        float: right;
+        padding: 8px;
+        width: 100%;
+
+        form {
+            position: relative;
+
+            input[type=search] {
+                font-family: @base-font-family;
+                font-weight: 400;
+                font-size: 0.85em;
+                background: @navigation-search-background;
+                border: @navigation-search-border;
+                border-radius: @base-border-radius;
+                box-sizing: border-box;
+                color: @gray-900;
+                font-style: italic;
+                margin: 0;
+                padding: 3px 8px;
+                width: 100%;
+
+                @media @desktops {
+                    width: 100%;
+                }
+            }
+
+            button[type=submit] {
+                background: @navigation-search-background;
+                border: 0;
+                bottom: 0.3em;
+                left: auto;
+                outline: none;
+                padding: 0 9px;
+                position: absolute;
+                right: 0.3em;
+                top: 0.3em;
+                color: @gray-700;
+
+                img {
+                    height: 12px;
+                    opacity: 0.7;
+                    padding: 1px;
+                }
+            }
+        }
+
+        @media @desktops {
+            display: inline-block;
+            position: relative;
+            width: 16em;
+
+            input {
+                box-sizing: border-box;
+                display: block;
+            }
+        }
+    }
+}
+
+/* SITE FOOTER */
+footer.site-footer {
+  //change all my footer text colors here: -> //
+  @default-color: @gray-600;
+  @link-color: #2286A7;
+  //
+
+  background: @gray-950;
+  color: @default-color;
+  font-family: @base-font-family;
+
+  section {
+    padding: 37px;
+  }
+
+  .github-icon {
+    padding-right: 0.5em;
+    color: @default-color;
+  }
+
+  .twitter-icon {
+    color: @twitter;
+  }
+
+  .version-number {
+    color: @default-color;
+    font-size: 0.8em;
+    padding-left: 15px;
+  }
+
+  a:link, a:visited {
+    color: @link-color;
+  }
+  height: auto;
+}

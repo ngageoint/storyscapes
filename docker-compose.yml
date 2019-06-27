@@ -1,0 +1,103 @@
+version: '3.1'
+services:
+
+  pgadmin:
+    build: ./docker/pgadmin
+    image: quay.io/mapstory/pgadmin
+    networks:
+      internal:
+    expose:
+      - "5050"
+
+  elasticsearch:
+    image: elasticsearch:1.6
+    networks:
+      internal:
+    expose:
+      - "9200"
+
+  rabbitmq:
+    build: ./docker/rabbitmq
+    image: quay.io/mapstory/rabbitmq
+    networks:
+      internal:
+    expose:
+      - "15671"
+      - "15672"
+
+  django:
+    build: .
+    image: quay.io/mapstory/django
+    depends_on:
+      - django_volumes
+    links:
+      - elasticsearch
+      - rabbitmq
+    volumes:
+      - mapstory_media:/var/lib/mapstory/media/
+      - mapstory_static:/var/lib/mapstory/static/
+    networks:
+      internal:
+    expose:
+      - "8000"
+
+  celery:
+    build: .
+    image: quay.io/mapstory/django
+    depends_on:
+      - django_volumes
+    links:
+      - elasticsearch
+      - rabbitmq
+    command: --celery
+    volumes:
+      - mapstory_media:/var/lib/mapstory/media/
+      - mapstory_static:/var/lib/mapstory/static/
+    networks:
+      internal:
+    expose:
+      - "8000"
+
+  django_volumes:
+    build: .
+    image: quay.io/mapstory/django
+    user: root
+    entrypoint: /bin/sh -c "chown -R mapstory:mapstory /var/lib/mapstory"
+    volumes:
+      - mapstory_media:/var/lib/mapstory/media/
+      - mapstory_static:/var/lib/mapstory/static/
+
+  geoserver:
+    image: quay.io/mapstory/geoserver:2.11.2-1.1.1
+    volumes:
+      - geoserver:/var/lib/geoserver
+    networks:
+      internal:
+    expose:
+      - "8080"
+
+  nginx:
+    build: ./docker/nginx
+    image: quay.io/mapstory/nginx
+    links:
+      - django
+      - geoserver
+    volumes:
+      - mapstory_media:/var/lib/mapstory/media/:ro
+      - mapstory_static:/var/lib/mapstory/static/:ro
+    networks:
+      internal:
+    expose:
+      - "80"
+      - "443"
+    ports:
+      - "80:80"
+      - "443:443"
+
+networks:
+  internal:
+
+volumes:
+  geoserver:
+  mapstory_static:
+  mapstory_media:

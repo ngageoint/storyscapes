@@ -1,0 +1,81 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+{% load threadedcomments_tags %}
+{% load fluent_comments_tags %}
+{% load mapstory_tags %}
+{% load avatar_tags %}
+
+{% block middle %}
+<section>
+    <div class="blog-banner" style="background-image: url('{{ STATIC_URL }}/mapstory/img/bg_topography.png');">
+        <div class="row">
+            <div class="col-sm-9" style="color: white;">
+                <h1>{{ SITE_NAME }} Community Journal</h1>
+                <h3>Share your ideas, projects and questions with the rest of the {{ SITE_NAME }} community.</h3>
+            </div>
+        </div>
+        <div class="row">
+            <a href="{% url 'journal-create' %}"?\>
+                <button class="button white-button-inverse pull-right" title="" target="blank">
+                    <span>write an entry</span>
+                </button>
+            </a>
+        </div>
+    </div>
+</section>
+<div class="container">
+    {% if user.is_authenticated %}
+        {% if drafts %}
+            <span class="dropdown draft-button">
+                <a id="dLabel" role="button" data-toggle="dropdown" class="dropdown-toggle">
+		 		complete a draft entry <span class="caret"></span>
+            </a>
+			<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                {% for d in drafts %}
+                    <li>
+                        <a href="{% url 'journal-update' pk=d.pk %}">
+                            {{ d.title }} - {{ d.date }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+		</span>
+        {% endif %}
+    {% endif %}
+</div>
+<div class="container">
+    {% if not entries %}
+        <h2>No Journal Entries Yet :(</h2>
+    {% endif %}
+    {% for entry in entries %}
+        <div class="row blog-panel">
+            <div class="row">
+                {% include "journal/_entry_title.html" %}
+            </div>
+            <div class="row">
+                <div class="blog-content col-sm-8 col-sm-offset-4">
+                    {{ entry.html|safe }}
+                    <div class="pull-right">
+                    {% get_comment_count for entry as num_comments %}
+                        <a href="{{ entry.get_absolute_url }}">{{ num_comments }} comments</a>
+                    {% if user.is_authenticated %}
+                        <a href="{{ entry.get_absolute_url }}" class="btn btn-primary btn-xs" role="button">Reply</a>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="row pagination text-center">
+        {% if page_obj.has_previous %}
+            <a href="{% url 'journal' %}?page={{ page_obj.previous_page_number }}">[ previous ]</a>
+        {% endif %}
+        <span class="page-current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+    </span>
+        {% if page_obj.has_next %}
+            <a href="{% url 'journal' %}?page={{ page_obj.next_page_number }}">[ next ]</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
