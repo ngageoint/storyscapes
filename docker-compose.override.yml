@@ -1,158 +1,35 @@
-# Dev configuration
-version: '3.1'
+version: '2.2'
 services:
-  selenium:
-    image: selenium/standalone-chrome
-    links:
-      - nginx
-    networks:
-      internal:
-    expose:
-      - "4444"
-
-  protractor:
-    build:
-      context: .
-      dockerfile: Dockerfile.protractor
-    image: quay.io/mapstory/protractor:master
-    links:
-      - selenium
-      - nginx
-    volumes:
-      - ./mapstory/tests:/opt/mapstory/tests
-    networks:
-      internal:
-
-  postgres:
-    image: mdillon/postgis:9.6
-    env_file:
-      - docker/env/dev/db_auth.env
-      - docker/env/dev/postgres.env
-    volumes:
-      - postgres:/var/lib/postgresql/data
-    networks:
-      internal:
-    expose:
-      - "5432"
-#    ports:
-#      - "5432:5432"
-
-  pgadmin:
-    image: quay.io/mapstory/pgadmin:master
-    links:
-      - postgres
-    env_file:
-      - docker/env/dev/db_auth.env
-#    ports:
-#      - "5050:5050"
-
-  elasticsearch:
-    ports:
-      - "9200:9200"
-
-  rabbitmq:
-    image: quay.io/mapstory/rabbitmq:master
-    environment:
-      - RABBITMQ_DEFAULT_USER=mapstory
-      - RABBITMQ_DEFAULT_PASS=password
-      - RABBITMQ_DEFAULT_VHOST=mapstory
-#    ports:
-#      - "15671:15671"
-#      - "15672:15672"
-
-  maploom-build:
-    build: ./deps/maploom
-    image: quay.io/mapstory/maploom-build
-    environment:
-      GIT_DIR: /git
-    volumes:
-      - ./deps/maploom:/usr/src/app
-      - .git:/git
-
-  django-maploom-build:
-    build: ./deps/django-maploom
-    image: quay.io/mapstory/django-maploom-build
-    environment:
-      GIT_DIR: /git
-    depends_on:
-      - maploom-build
-    volumes:
-      - ./deps/django-maploom:/django-maploom
-      - ./deps/maploom:/maploom
-      - .git:/git
-
-  story-tools-build:
-    build: ./deps/story-tools
-    image: quay.io/mapstory/story-tools-build
-    environment:
-      GIT_DIR: /git
-    volumes:
-      - ./deps/story-tools:/usr/src/app
-      - .git:/git
 
   django:
-    image: quay.io/mapstory/django:master
-    links:
-      - postgres
-    env_file:
-      - docker/env/dev/public_host.env
-      - docker/env/dev/geoserver.env
-      - docker/env/dev/mapstory.env
-      - docker/env/dev/db_auth.env
-    command: [--collect-static-dev, --init-db, --reindex, --serve-dev]
+    build: .
+    # Loading the app is defined here to allow for
+    # autoreload on changes it is mounted on top of the
+    # old copy that docker added when creating the image
     volumes:
-      - .:/srv/mapstory/
-      - ./cover:/srv/mapstory/cover
-      - site-packages:/usr/local/lib/python2.7/site-packages-copy
-#    ports:
-#      - "8000:8000"
-    stdin_open: true
-    tty: true
+      - '.:/usr/src/app'
+    environment:
+      - DEBUG=False
+      - GEONODE_LB_HOST_IP=localhost
+      - GEONODE_LB_PORT=80
+      - SITEURL=http://localhost/
+      - ALLOWED_HOSTS=['localhost', ]
+      - GEOSERVER_PUBLIC_LOCATION=http://localhost/gs/
 
   celery:
-    image: quay.io/mapstory/django:master
-    links:
-      - postgres
+    build: .
+    volumes:
+      - '.:/usr/src/app'
     environment:
-      REQUESTS_CA_BUNDLE: /etc/ssl/certs/ca-certificates.crt
-    env_file:
-      - docker/env/dev/public_host.env
-      - docker/env/dev/geoserver.env
-      - docker/env/dev/mapstory.env
-      - docker/env/dev/db_auth.env
-    volumes:
-      - .:/srv/mapstory/
-      - ./cover:/srv/mapstory/cover
-      - site-packages:/usr/local/lib/python2.7/site-packages-copy
-
-  django_volumes:
-    image: quay.io/mapstory/django:master
-    entrypoint: /bin/sh -c "chown -R mapstory:mapstory /var/lib/mapstory && chown -R mapstory:mapstory /srv/mapstory/cover"
-    volumes:
-      - ./cover:/srv/mapstory/cover
+      - DEBUG=False
+      - GEONODE_LB_HOST_IP=localhost
+      - GEONODE_LB_PORT=80
+      - SITEURL=http://localhost/
+      - ALLOWED_HOSTS=['localhost', ]
+      - GEOSERVER_PUBLIC_LOCATION=http://localhost/gs/
 
   geoserver:
-    links:
-      - postgres
-    env_file:
-      - docker/env/dev/public_host.env
-      - docker/env/dev/geoserver.env
-      - docker/env/dev/db_auth.env
-#    ports:
-#      - "8080:8080"
-
-  nginx:
-    image: quay.io/mapstory/nginx:master
-    env_file:
-      - docker/env/dev/public_host.env
-    volumes:
-      - .:/srv/mapstory/ # mapstory_static has symlinks to this
-      - site-packages:/usr/local/lib/python2.7/site-packages:ro # and this
-    networks:
-      internal:
-        aliases:
-          - docker
-
-volumes:
-  postgres:
-  site-packages:
+    environment:
+      - GEONODE_LB_HOST_IP=localhost
+      - GEONODE_LB_PORT=80
+  #    - NGINX_BASE_URL=
