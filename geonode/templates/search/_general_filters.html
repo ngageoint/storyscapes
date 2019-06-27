@@ -1,0 +1,24 @@
+{% load i18n %}
+{% if SEARCH_FILTERS.CATEGORIES_ENABLED %}
+<nav class="filter" ng-cloak>
+  {% if facet_type == 'layers' %}
+    {% verbatim %}
+    <div id="render_categoriesMultiList"/>
+    {% endverbatim %}
+  {% else %}
+    {% verbatim %}
+    <div id="render_layercategoriesMultiList"/>
+    {% endverbatim %}
+  {% endif %}
+</nav>
+{% endif %}
+{% if SEARCH_FILTERS.OWNERS_ENABLED %}
+<nav class="filter" ng-cloak>
+  <div id="render_ownersMultiList"/>
+</nav>
+{% endif %}
+{% if SEARCH_FILTERS.DATE_ENABLED %}
+<nav class="filter" ng-cloak>
+  <div id="render_dateFilter">
+</nav>
+{% endif %}

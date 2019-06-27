@@ -1,0 +1,10 @@
+{% load i18n %}
+{% load base_tags %}
+{% facets as facets %}
+<script>
+window.djangoSearchVars = window.djangoSearchVars || {};
+window.djangoSearchVars.facets = "{{ facets }}";
+</script>
+<nav class="filter">
+  <div id="render_typesMultiList"/>
+</nav>
