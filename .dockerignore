@@ -1,4 +1,13 @@
-.git
-**/node_modules
-vendor/maploom/vendor
-vendor/geonode/docs
+**/*.DS_Store
+**/*.pyc
+**/node_modules/
+**/deps/*/.git/
+.git/
+.vagrant/
+docker/*
+!docker/django
+!docker/nginx/ca.crt
+docker-compose.yml
+Dockerfile
+scripts/misc
+scripts/provision

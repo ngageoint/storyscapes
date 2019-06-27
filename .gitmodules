@@ -1,33 +1,32 @@
-[submodule "vendor/geonode"]
-	path = vendor/geonode
-	url = git@github.com:boundlessgeo/geonode.git
-	branch = exchange/1.4.x
-[submodule "vendor/maploom"]
-	path = vendor/maploom
-	url = git@github.com:boundlessgeo/MapLoom.git
-[submodule "vendor/sphinx-theme"]
-	path = vendor/sphinx-theme
-	url = git@github.com:boundlessgeo/sphinx-theme.git
-[submodule "vendor/django-osgeo-importer"]
-	path = vendor/django-osgeo-importer
-	url = git@github.com:GeoNode/django-osgeo-importer.git
+[submodule "deps/django-mailer"]
+	path = deps/django-mailer
+	url = https://github.com/pinax/django-mailer.git
+	branch = master
+[submodule "deps/icon-commons"]
+	path = deps/icon-commons
+	url = https://github.com/MapStory/icon-commons.git
+	branch = master
+[submodule "deps/django-osgeo-importer"]
+	path = deps/django-osgeo-importer
+	url = https://github.com/GeoNode/django-osgeo-importer.git
 	branch = angular-1.6
-[submodule "vendor/gsconfig"]
-	path = vendor/gsconfig
-	url = git@github.com:boundlessgeo/gsconfig.git
-[submodule "vendor/geonode-elasticsearch"]
-	path = vendor/geonode-elasticsearch
-	url = git@github.com:boundlessgeo/geonode-elasticsearch.git
-[submodule "vendor/docker"]
-	path = vendor/docker
-	url = git@github.com:boundlessgeo/docker.git
-[submodule "vendor/exchange-mobile-extension"]
-	path = vendor/exchange-mobile-extension
-	url = git@github.com:boundlessgeo/exchange-mobile-extension.git
-[submodule "vendor/django-ssl-pki"]
-	path = vendor/django-ssl-pki
-	url = git@github.com:boundlessgeo/django-ssl-pki.git
-[submodule "vendor/arcrest"]
-	path = vendor/arcrest
-	url = git@github.com:boundlessgeo/ArcREST.git
-	branch = ps/pki
+[submodule "deps/django-maploom"]
+	path = deps/django-maploom
+	url = https://github.com/MapStory/django-maploom.git
+	branch = composer
+[submodule "deps/geonode"]
+	path = deps/geonode
+	url = https://github.com/MapStory/geonode.git
+	branch = mapstory-2.6.x
+[submodule "deps/maploom"]
+	path = deps/maploom
+	url = https://github.com/MapStory/MapLoom.git
+	branch = feature/composer-wip
+[submodule "deps/story-tools"]
+	path = deps/story-tools
+	url = https://github.com/MapStory/story-tools.git
+	branch = master
+[submodule "deps/story-tools-composer"]
+	path = deps/story-tools-composer
+	url = https://github.com/MapStory/story-tools-composer.git
+	branch = master

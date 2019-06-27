@@ -1,108 +1,37 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# C extensions
-*.so
-
-# Distribution / packaging
-.Python
-env/
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-#lib/
-#lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-*.egg
-
-# PyInstaller
-#  Usually these files are written by a python script from a template
-#  before PyInstaller builds the exe, so as to inject date/other infos into it.
-*.manifest
-*.spec
-
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.coverage.*
-.cache
-.pytest_cache
-nosetests.xml
-coverage.xml
-*.cover
-.hypothesis/
-
-# Translations
-*.mo
-*.pot
-
-# Django stuff:
 development.db
-
-# Sphinx documentation
-docs/_build/
-
-# PyBuilder
-target/
-
-#Ipython Notebook
-.ipynb_checkpoints
-
-#atom
-.tags
-
-#Vagrant Dev Setup
+downloaded
+geoserver
+**/m2
+mapstory/static/maploom
+mapstory/static/mapstory/js/dist/
+mapstory/static/style/fonts
+mapstory/static/style/site/font-awesome.css
+mapstory/static/style/themes/**/*.css
+mapstory/static/vendor/
+mapstory/settings/local_key.py
+celerybeat-schedule
+node_modules
+*.pyc
+.ropeproject
+static_root
+uploaded
+.sauce
 .vagrant
-.venv
-dev/.geoserver/
-dev/.logs/
-.storage
-*.log
-
-
-exchange/migrations/
+.vaultpass
+.vscode
 .DS_Store
-
-#bower
-exchange/static/vendor/
-
-#pytest + coverage
-exchange/db.sqlite3
-cov_html/
-
-# audit log
-exchange/settings/exchange_audit_log.json
-
-# pycharm
+._.DS_Store
+._development.db-journal
 .idea
-
-# docker
-docker/data/*
-
-# anywhere
-vendor/exchange-mobile-extension
-
-# services
-vendor/services
-
-# sonar
-.scannerwork/
-
-# docs
-exchange/static/docs
-
-# local test settings
-exchange/settings/local_settings.py
+mapstory/importer/test_ogr
+mapstory/importer/static/importer/bower_components
+cover
+.coverage
+result.json
+.noseids
+ghostdriver.log
+mapstory/tests/acceptance/output/
+mapstory/tests/e2e/images/diff/
+mapstory/tests/errors/err*
+mapstory/tests/errors/known/err*
+ll_scripts/
